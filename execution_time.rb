@@ -1,3 +1,4 @@
+
 def my_min_quad(list)
   list.each do |el|
     smallest = true
@@ -30,4 +31,19 @@ def largest_contiguous_subsum_quad(list)
   end
   largest_sum
 end
-#p largest_contiguous_subsum_quad([2, 3, -6, 7, -6, 7])
+
+def largest_contiguous_subsum_linear(list)
+  largest_sum = list.first
+  current_sum = list.first
+
+  (1...list.length).each do |idx|
+    current_sum = current_sum.nil? ? list[idx] : current_sum += list[idx]
+    largest_sum = current_sum if largest_sum < current_sum
+    if current_sum < 0
+      current_sum = nil
+    end
+  end
+
+  largest_sum
+end
+p largest_contiguous_subsum_linear([-2, -3, -6, -7, -6, -7])
